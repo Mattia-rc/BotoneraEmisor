@@ -27,7 +27,7 @@ int cuentaLocal = 0;                             // CUENTA LOCAL
 int estadoBotonDecrementoLocal;                  // ESTADO BOTON DECREMENTO LOCAL
 int estadoBotonAnteriorDecrementoLocal;          // ESTADO BOTON ANTERIOR DECREMENTO LOCAL
 
-
+                          
 int estadoBotonIncrementoVis;                 // ESTADO DEL BOTON DE PUNTOS VISI
 int estadoBotonAnteriorIncrementoVis;           // ESTADO DEL BOTON DE PUNTOS VISI
 
@@ -257,15 +257,7 @@ boolean antirebote (int pin) {
        void actualizarNumero (){
         switch (cuenta) {
 
-          case 0: 
-          digitalWrite(a,HIGH);
-          digitalWrite(b,HIGH);
-          digitalWrite(c,HIGH);
-          digitalWrite(d,HIGH);
-          digitalWrite(e,HIGH);
-          digitalWrite(f,HIGH);
-          digitalWrite(g, LOW);
-          break;
+     
 
           case 1:
         digitalWrite (a, LOW);
@@ -468,28 +460,19 @@ void loop() {
  estadoBotonIncremento = digitalRead(botonIncrementoSegmentos);
  if(estadoBotonIncremento != estadoBotonAnteriorIncremento) {
   if(digitalRead(botonIncrementoSegmentos)== 1){
-    cuenta++;
-    if(cuenta > 4){
-      cuenta = 4;
-
-     const char *msg = "8";                                // carga numero 8 en mensaje a enviar
+    const char *msg = "8";                                // carga numero 8 en mensaje a enviar
     rf_driver.send((uint8_t *)msg, strlen(msg));          // envia el mensaje
     rf_driver.waitPacketSent();                          // espera al envio correcto del mensaje
 
+    
+    cuenta++;
+    if(cuenta > 4){
+      cuenta = 1;
+
+    
     }
   }
  }
  estadoBotonAnteriorIncremento = estadoBotonIncremento;
   actualizarNumero();
 }
-
-
-
-
-
-
-
-
-
-
-  
